@@ -17,100 +17,102 @@
             overflow-x: hidden;
             position: relative;
             min-height: 100vh;
-            color: #FFD700;
-            background-color: #1a001a;
+            color: #fff;
+            background-color: #2a0015; /* Color de respaldo si falla la imagen */
         }
 
-        /* --- FONDO MORADO CON MOVIMIENTO "NEBULA" --- */
-        .animated-bg {
+        /* --- TU IMAGEN COMO FONDO ANIMADO --- */
+        .custom-bg-image {
+            position: fixed;
+            top: 0; left: 0; 
+            width: 100%; height: 100%;
+            z-index: -5;
+            
+            /* AQUÍ SE CARGA TU IMAGEN */
+            /* Asegúrate de que el archivo se llame exactamente así: */
+            background-image: url('fondo-glitter.jpg'); 
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* Animación de movimiento lento (Efecto Ken Burns) */
+            animation: slowMove 20s ease-in-out infinite alternate;
+        }
+
+        @keyframes slowMove {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); } /* Zoom suave hacia adentro */
+        }
+
+        /* --- DESTELLOS ADICIONALES (Para potenciar tu imagen) --- */
+        .sparkles-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: linear-gradient(125deg, #1a001a 0%, #3e003e 25%, #240046 50%, #4a0e4e 75%, #1a001a 100%);
-            background-size: 400% 400%;
-            animation: bgMove 15s ease infinite;
-        }
-
-        @keyframes bgMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- EFECTO GLITTER (ESTRELLAS) --- */
-        .glitter-container {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: -1;
+            z-index: -4;
             background-image: 
-                radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 3px),
-                radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 2px),
-                radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 3px);
-            background-size: 550px 550px, 350px 350px, 250px 250px;
-            background-position: 0 0, 40px 60px, 130px 270px;
-            animation: glitterMove 60s linear infinite;
-        }
-        
-        @keyframes glitterMove {
-            from { transform: translateY(0); }
-            to { transform: translateY(-500px); }
+                radial-gradient(white 1px, transparent 1.5px),
+                radial-gradient(rgba(255, 215, 0, 0.8) 1.5px, transparent 2px);
+            background-size: 60px 60px;
+            opacity: 0.4;
+            animation: twinkle 3s linear infinite;
+            pointer-events: none;
         }
 
-        /* --- TEXTO ORO ALTO CONTRASTE --- */
-        .text-high-gold {
-            color: #FFEB3B; /* Amarillo brillante */
-            text-shadow: 
-                2px 2px 0px #000, 
-                0px 0px 10px rgba(255, 215, 0, 0.5); /* Sombra negra dura + Resplandor */
-            font-weight: 900;
-            letter-spacing: 0.5px;
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: translateY(0); }
+            50% { opacity: 0.6; }
+            100% { opacity: 0.3; transform: translateY(-20px); }
         }
-        
-        .text-metallic-gold {
-            background: linear-gradient(to bottom, #FFF 0%, #FFD700 40%, #B8860B 100%);
+
+        /* --- ORO REAL (Textos) --- */
+        .text-gold-real {
+            background: linear-gradient(180deg, #FFFCDB 0%, #FFD700 25%, #D4AF37 50%, #AA771C 75%, #8B5A00 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(2px 2px 0px rgba(0,0,0,0.8));
+            background-clip: text;
+            filter: drop-shadow(0px 2px 0px rgba(0,0,0,1)) drop-shadow(0px 0px 10px rgba(255, 215, 0, 0.4));
             font-weight: 900;
         }
 
-        /* --- PANELES UNIFICADOS --- */
+        /* --- PANELES OBSIDIANA --- */
         .glass-panel {
-            background: rgba(20, 0, 30, 0.7); 
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 20px rgba(100, 0, 100, 0.5);
+            background: linear-gradient(180deg, rgba(20, 0, 10, 0.85), rgba(0, 0, 0, 0.95));
+            border: 2px solid #D4AF37;
+            box-shadow: 
+                0 0 30px rgba(0, 0, 0, 0.8),
+                inset 0 0 20px rgba(255, 0, 128, 0.1);
             position: relative;
             z-index: 10;
         }
 
-        /* --- BOTONES DE LUJO --- */
+        /* --- BOTONES PREMIUM --- */
         .btn-gold {
             position: relative;
             overflow: hidden;
-            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
+            background: linear-gradient(180deg, #222 0%, #000 100%); 
             border: 2px solid #FFD700; 
             text-transform: uppercase;
             font-weight: 900;
-            transition: transform 0.2s;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.5);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.8);
         }
         .btn-gold:hover {
-            transform: scale(1.03);
+            transform: translateY(-2px) scale(1.02);
             border-color: #FFF;
-            box-shadow: 0 0 15px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
         }
 
-        /* --- ANIMACIONES --- */
-        @keyframes flash-soft {
-            0%, 100% { filter: brightness(1); transform: scale(1); }
-            50% { filter: brightness(1.3); transform: scale(1.05); }
+        /* --- DIVISORES --- */
+        .gold-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #FFD700, #FFF, #FFD700, transparent);
+            margin: 20px 0;
+            opacity: 1;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.4);
         }
-        .blink-effect {
-            animation: flash-soft 2.5s infinite ease-in-out;
-        }
-        
+
+        /* --- ANIMACIONES ADICIONALES --- */
         .pulse-whatsapp { animation: pulse-green 2s infinite; }
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); }
@@ -118,43 +120,44 @@
             100% { box-shadow: 0 0 0 0 rgba(34, 197, 94, 0); }
         }
 
-        /* Animación Alerta Roja */
-        .alert-pulse { animation: pulse-red 3s infinite; }
+        .alert-pulse { animation: pulse-red 2s infinite; }
         @keyframes pulse-red {
-            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
-            50% { box-shadow: 0 0 15px 5px rgba(220, 38, 38, 0.2); }
-            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.6); transform: scale(1); }
+            50% { box-shadow: 0 0 20px 5px rgba(220, 38, 38, 0.3); transform: scale(1.02); }
+            100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); transform: scale(1); }
         }
-        
-        /* Divisores dorados */
-        .gold-divider {
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #FFD700, transparent);
-            margin: 25px 0;
-            opacity: 0.6;
+
+        .blink-effect { animation: glow-image 3s infinite alternate; }
+        @keyframes glow-image {
+            from { filter: drop-shadow(0 0 2px rgba(255,215,0,0.3)); }
+            to { filter: drop-shadow(0 0 8px rgba(255,215,0,0.8)); }
         }
     </style>
 </head>
 <body class="flex flex-col items-center py-8 px-4">
 
-    <!-- Fondos -->
-    <div class="animated-bg"></div>
-    <div class="glitter-container"></div>
+    <!-- FONDO DE IMAGEN + DESTELLOS -->
+    <div class="custom-bg-image"></div>
+    <div class="sparkles-overlay"></div>
 
     <main class="w-full max-w-md flex flex-col gap-6 z-10">
         
         <!-- HEADER -->
         <div class="glass-panel rounded-3xl p-6 text-center border-t-4 border-yellow-400">
-            <div class="w-28 h-28 mx-auto rounded-full p-1 bg-gradient-to-tr from-[#BF953F] via-[#FCF6BA] to-[#AA771C] mb-3 shadow-2xl">
-                <!-- FOTO DE PERFIL: CAMBIA EL ENLACE AQUI -->
-                <img src="https://placehold.co/400x400/86198f/FFF?text=F" alt="Flaviani" class="w-full h-full rounded-full object-cover border-2 border-black">
+            <!-- Anillo dorado brillante -->
+            <div class="w-28 h-28 mx-auto rounded-full p-1 bg-gradient-to-b from-[#FFF] via-[#FFD700] to-[#8B5A00] mb-4 shadow-[0_0_25px_rgba(255,215,0,0.4)]">
+                <!-- FOTO DE PERFIL -->
+                <img src="https://placehold.co/400x400/2a0015/FFF?text=F" alt="Flaviani" class="w-full h-full rounded-full object-cover border-4 border-black">
             </div>
             
-            <h1 class="text-3xl font-black drop-shadow-md tracking-tight">
-                HOLA SOY <span class="text-metallic-gold">FLAVIANI</span> 🩷
+            <!-- TITULO -->
+            <h1 class="font-black text-center text-gold-real text-3xl mb-1 uppercase tracking-wide leading-none drop-shadow-2xl">
+                HOLA SOY FLAVIANI <br>
+                <span class="text-5xl block mt-2 filter drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">FLAVIANI</span>
             </h1>
-            <div class="mt-2">
-                <span class="bg-black/60 text-high-gold text-xs px-4 py-1.5 rounded-full border border-yellow-500 uppercase tracking-widest inline-block shadow-lg">
+
+            <div class="mt-4">
+                <span class="bg-black text-gold-real font-black text-xs px-6 py-2 rounded-full border-2 border-[#D4AF37] uppercase tracking-widest inline-block shadow-[0_0_15px_rgba(0,0,0,0.8)]">
                     ✨ Cajera Red Bruna ✨
                 </span>
             </div>
@@ -162,140 +165,167 @@
 
         <!-- PLATAFORMAS -->
         <div class="glass-panel rounded-2xl p-6">
-            <h2 class="text-center text-xl font-bold mb-6 flex items-center justify-center gap-2 text-metallic-gold drop-shadow-md">
-                <i class="fa-solid fa-gamepad"></i> MIS PLATAFORMAS
+            <h2 class="font-black text-center text-gold-real text-2xl mb-8 uppercase tracking-widest border-b border-[#D4AF37]/30 pb-4 shadow-sm">
+                MIS PLATAFORMAS
             </h2>
             
             <div class="grid grid-cols-2 gap-4">
                 <!-- THOR -->
-                <a href="https://thorvip.com/" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
-                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center p-2 backdrop-blur-sm relative z-10">
-                        <img src="e03be0c0-2435-48ba-aa2d-a12dcc594e1d.webp" onerror="this.src='https://placehold.co/150?text=Thor'" alt="Thor" class="w-full h-full object-contain drop-shadow-lg blink-effect">
+                <a href="https://thorvip.com/" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3 group">
+                    <div class="w-24 h-24 rounded-full bg-black/40 flex items-center justify-center p-2 backdrop-blur-sm relative z-10 border border-[#D4AF37]/50 shadow-inner">
+                        <img src="e03be0c0-2435-48ba-aa2d-a12dcc594e1d.webp" onerror="this.src='https://placehold.co/150?text=Thor'" alt="Thor" class="w-full h-full object-contain blink-effect group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <span class="text-sm tracking-wide text-high-gold">THOR</span>
+                    <span class="font-black text-gold-real text-sm uppercase tracking-wide">THOR</span>
                 </a>
                 <!-- GANAMOS -->
-                <a href="https://ganamosnet.org" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
-                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center p-2 backdrop-blur-sm relative z-10">
-                        <img src="6149f746-d3d7-40bc-b007-2e38ce33d1a5.webp" onerror="this.src='https://placehold.co/150?text=Ganamos'" alt="Ganamos" class="w-full h-full object-contain drop-shadow-lg blink-effect">
+                <a href="https://ganamosnet.org" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3 group">
+                    <div class="w-24 h-24 rounded-full bg-black/40 flex items-center justify-center p-2 backdrop-blur-sm relative z-10 border border-[#D4AF37]/50 shadow-inner">
+                        <img src="6149f746-d3d7-40bc-b007-2e38ce33d1a5.webp" onerror="this.src='https://placehold.co/150?text=Ganamos'" alt="Ganamos" class="w-full h-full object-contain blink-effect group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <span class="text-sm tracking-wide text-high-gold">GANAMOS</span>
+                    <span class="font-black text-gold-real text-sm uppercase tracking-wide">GANAMOS</span>
                 </a>
                 <!-- GANA EN CASA -->
-                <a href="https://GanaEnCasa.eu" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3">
-                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center p-2 backdrop-blur-sm relative z-10">
-                        <img src="ebf8d30e-2b36-4cd8-a419-ae6db8bb14b8.webp" onerror="this.src='https://placehold.co/150?text=Casa'" alt="GanaEnCasa" class="w-full h-full object-contain drop-shadow-lg blink-effect">
+                <a href="https://GanaEnCasa.eu" target="_blank" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3 group">
+                    <div class="w-24 h-24 rounded-full bg-black/40 flex items-center justify-center p-2 backdrop-blur-sm relative z-10 border border-[#D4AF37]/50 shadow-inner">
+                        <img src="ebf8d30e-2b36-4cd8-a419-ae6db8bb14b8.webp" onerror="this.src='https://placehold.co/150?text=Casa'" alt="GanaEnCasa" class="w-full h-full object-contain blink-effect group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <span class="text-sm tracking-wide text-high-gold">GANA EN CASA</span>
+                    <span class="font-black text-gold-real text-sm uppercase tracking-wide">GANA EN CASA</span>
                 </a>
                 <!-- OLYMPUSBET -->
-                <a href="#" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3 opacity-90">
-                    <div class="w-24 h-24 rounded-full bg-white/5 flex items-center justify-center p-2 backdrop-blur-sm relative z-10">
-                        <img src="f5832ea7-0165-43f5-9506-deb805aa06df.webp" onerror="this.src='https://placehold.co/150?text=Olympus'" alt="Olympus" class="w-full h-full object-contain drop-shadow-lg blink-effect">
+                <a href="#" class="btn-gold rounded-2xl p-4 flex flex-col items-center justify-center gap-3 opacity-90 group">
+                    <div class="w-24 h-24 rounded-full bg-black/40 flex items-center justify-center p-2 backdrop-blur-sm relative z-10 border border-[#D4AF37]/50 shadow-inner">
+                        <img src="f5832ea7-0165-43f5-9506-deb805aa06df.webp" onerror="this.src='https://placehold.co/150?text=Olympus'" alt="Olympus" class="w-full h-full object-contain blink-effect group-hover:scale-110 transition-transform duration-300">
                     </div>
-                    <span class="text-sm tracking-wide text-high-gold">OLYMPUSBET</span>
+                    <span class="font-black text-gold-real text-sm uppercase tracking-wide">OLYMPUSBET</span>
                 </a>
             </div>
 
-            <div class="text-center mt-6">
-                <p class="text-sm text-yellow-200 opacity-80 tracking-[0.3em]" style="font-family: 'Times New Roman', serif; font-style: italic;">
-                    ~ flaviani ~
+            <div class="text-center mt-8">
+                <p class="font-black text-[#D4AF37] text-xs uppercase tracking-[0.4em] opacity-60">
+                    ♦ ♠ flaviani ♥ ♣
                 </p>
             </div>
         </div>
 
-        <!-- SECCIÓN CRONOGRAMA + INFO (UNIFICADA) -->
+        <!-- SECCIÓN CRONOGRAMA + INFO -->
         <div class="glass-panel rounded-2xl p-6 text-sm">
             
-            <!-- TITULO -->
-            <h3 class="font-black text-center text-metallic-gold text-lg mb-4 uppercase tracking-wide">
+            <h3 class="font-black text-center text-gold-real text-xl mb-6 uppercase tracking-widest text-shadow-lg">
                 CRONOGRAMA
             </h3>
             
-            <!-- DATOS -->
-            <div class="text-center space-y-3 font-bold text-high-gold text-base">
-                <p>SIN LÍMITES DE APUESTAS</p>
-                <p>MÍNIMO DE CARGA: <span class="text-white text-lg">$3.000</span></p>
-                <p>MÍNIMO DE RETIRO: <span class="text-white text-lg">$7.000</span></p>
+            <div class="text-center space-y-5">
+                <div class="bg-black/40 p-3 rounded-lg border border-[#D4AF37]/20">
+                    <p class="font-black text-gold-real text-lg uppercase tracking-wide">SIN LÍMITES DE APUESTAS</p>
+                </div>
                 
-                <p class="mt-4 text-yellow-200 leading-tight">
-                    CARGAS MAYORES A <strong class="text-white">$4.000</strong><br>
-                    <span class="text-metallic-gold text-lg">¡SE RETIRA EL DOBLE!</span>
-                </p>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="bg-black/40 p-2 rounded-lg border border-[#D4AF37]/20">
+                        <p class="font-bold text-[#fcf6ba] text-xs uppercase">MÍNIMO CARGA</p>
+                        <p class="text-2xl font-black text-gold-real">$3.000</p>
+                    </div>
+                    <div class="bg-black/40 p-2 rounded-lg border border-[#D4AF37]/20">
+                        <p class="font-bold text-[#fcf6ba] text-xs uppercase">MÍNIMO RETIRO</p>
+                        <p class="text-2xl font-black text-gold-real">$7.000</p>
+                    </div>
+                </div>
+                
+                <div class="py-2">
+                    <p class="font-black text-gold-real text-sm uppercase tracking-wide">
+                        CARGAS MAYORES A <span class="text-xl text-white drop-shadow-md">$4.000</span>
+                    </p>
+                    <p class="font-black text-gold-real text-2xl uppercase mt-1 filter drop-shadow-[0_0_8px_rgba(255,215,0,0.5)]">
+                        ¡SE RETIRA EL DOBLE!
+                    </p>
+                </div>
             </div>
 
             <div class="gold-divider"></div>
 
-            <!-- HORARIOS -->
-            <h3 class="font-black text-center text-metallic-gold text-lg mb-5 uppercase tracking-wide">
+            <h3 class="font-black text-center text-gold-real text-xl mb-5 uppercase tracking-wide">
                 Horarios de Atención
             </h3>
             
             <div class="grid grid-cols-2 gap-3 mb-6">
-                <div class="bg-black/50 rounded-xl p-3 border border-yellow-600/30 text-center">
-                    <p class="text-[10px] text-yellow-200 uppercase font-bold">Lunes a Sábado</p>
-                    <p class="font-black text-xl text-white my-1">24 Hs</p>
-                    <span class="text-[9px] font-bold text-black bg-[#FFD700] px-2 py-0.5 rounded inline-block shadow-lg">PERFIL ABIERTO</span>
+                <div class="bg-gradient-to-br from-black to-[#220011] rounded-xl p-3 border border-[#D4AF37] text-center flex flex-col justify-center shadow-lg transform hover:scale-105 transition-transform">
+                    <p class="font-black text-[#fcf6ba] text-[10px] uppercase tracking-wide opacity-80">Lunes a Sábado</p>
+                    <p class="font-black text-gold-real text-3xl my-1 uppercase tracking-tighter">24 Hs</p>
+                    <span class="font-black text-black bg-gradient-to-r from-[#FFD700] to-[#AA771C] px-2 py-1 rounded inline-block shadow-lg text-[9px] uppercase tracking-wide">PERFIL ABIERTO</span>
                 </div>
-                <div class="bg-black/50 rounded-xl p-3 border border-yellow-600/30 flex flex-col justify-center text-center">
-                    <p class="text-[10px] text-yellow-200 uppercase font-bold">Domingo</p>
-                    <p class="font-bold text-md text-white mt-1">14:00 - 17:00</p>
+                <div class="bg-gradient-to-br from-black to-[#220011] rounded-xl p-3 border border-[#D4AF37]/50 flex flex-col justify-center text-center shadow-lg">
+                    <p class="font-black text-[#fcf6ba] text-[10px] uppercase tracking-wide opacity-80">Domingo</p>
+                    <p class="font-black text-gold-real text-xl mt-1 uppercase tracking-wide">14:00 <br>a<br> 17:00</p>
                 </div>
             </div>
 
-            <!-- NUEVO: RESPETAR PERFIL -->
-            <div class="text-center mb-6">
-                <p class="text-yellow-100 font-semibold text-xs uppercase tracking-wide">
+            <div class="text-center mb-6 bg-black/30 p-2 rounded-lg">
+                <p class="font-bold text-[#fcf6ba] text-xs uppercase tracking-wide mb-1 opacity-80">
                     🙏🏻 Se agradece respetar perfil:
                 </p>
-                <p class="text-metallic-gold font-bold mt-1 text-sm">
+                <p class="font-black text-gold-real text-sm uppercase tracking-widest">
                     ABIERTO • CERRADO • AUSENTE
                 </p>
             </div>
 
-            <!-- NUEVO: ALERTA IMPORTANTE -->
-            <div class="alert-pulse bg-red-900/60 border-2 border-red-500 rounded-xl p-4 text-center shadow-[0_0_15px_rgba(220,38,38,0.3)]">
-                <p class="text-red-300 font-black text-lg mb-2 uppercase tracking-widest flex justify-center items-center gap-2">
-                    <i class="fa-solid fa-triangle-exclamation"></i> Importante
+            <!-- ALERTA IMPORTANTE (ROJO INTENSO) -->
+            <div class="alert-pulse bg-gradient-to-br from-[#4a0000] to-black border-2 border-red-600 rounded-xl p-5 text-center shadow-[0_0_25px_rgba(220,38,38,0.5)] relative overflow-hidden">
+                <!-- Brillo de fondo -->
+                <div class="absolute inset-0 bg-red-600 opacity-10 blur-xl"></div>
+                
+                <p class="font-black text-white text-xl mb-3 uppercase tracking-wide flex justify-center items-center gap-2 relative z-10 drop-shadow-md">
+                    <i class="fa-solid fa-triangle-exclamation text-yellow-400"></i> Importante
                 </p>
-                <p class="text-white font-bold text-sm leading-relaxed mb-2">
+                <p class="font-black text-white text-sm uppercase tracking-wide mb-3 relative z-10">
                     ENVIAR CAPTURA DE PREMIOS <br>
-                    <span class="text-xs font-normal text-red-100">(NO SALDO FINAL)</span>
+                    <span class="text-xs text-red-200 font-bold">(NO SALDO FINAL)</span>
                 </p>
-                <div class="bg-red-950/80 rounded-lg p-2 border border-red-500/30">
-                    <p class="text-xs text-red-200 font-semibold">
-                        Si no envía captura, pasa a crono de pago de <span class="text-white font-bold">24 a 72 Hs</span>.
+                <div class="bg-black/60 rounded-lg p-2 border border-red-500/30 relative z-10">
+                    <p class="font-bold text-white text-xs uppercase tracking-wide">
+                        Si no envía captura, pasa a crono de pago de <span class="text-base text-yellow-400 font-black">24 a 72 Hs</span>.
                     </p>
                 </div>
+            </div>
+
+            <!-- AREA DE IMAGEN Y AVISO LEGAL -->
+            <div class="mt-6 flex flex-row items-center justify-center w-full gap-3 border-t-2 border-[#D4AF37]/30 pt-6">
+                
+                <!-- IMAGEN PEQUEÑA -->
+                <div class="w-12 h-12 rounded-full overflow-hidden border-2 border-[#D4AF37] shadow-[0_0_10px_rgba(255,215,0,0.3)] flex-shrink-0 bg-black">
+                    <!-- REEMPLAZA src CON TU IMAGEN -->
+                    <img src="Mayor18.webp" 
+                         alt="+18" 
+                         class="w-full h-full object-cover">
+                </div>
+
+                <!-- Texto +18 -->
+                <span class="inline-block px-4 py-2 rounded-full border border-[#D4AF37]/40 bg-black/90 shadow-lg font-black text-[#D4AF37] text-[10px] uppercase tracking-[0.2em]">
+                    Solo mayores de 18 años
+                </span>
+
             </div>
 
         </div>
 
         <!-- CONTACTO -->
-        <div class="w-full flex flex-col gap-4">
+        <div class="w-full flex flex-col gap-4 mb-8">
             <!-- WhatsApp -->
             <button 
                 onclick="contactarWhatsApp()"
-                class="w-full py-4 bg-gradient-to-r from-green-600 to-green-700 rounded-xl font-bold text-xl text-white shadow-[0_0_20px_rgba(34,197,94,0.4)] pulse-whatsapp flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform active:scale-95 cursor-pointer border-2 border-green-400/50"
+                class="w-full py-5 bg-gradient-to-r from-green-800 via-green-600 to-green-800 rounded-xl shadow-[0_0_30px_rgba(34,197,94,0.3)] pulse-whatsapp flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform active:scale-95 cursor-pointer border-2 border-green-400 relative overflow-hidden group"
             >
-                <i class="fa-brands fa-whatsapp text-3xl drop-shadow-md"></i>
-                <span class="drop-shadow-md">CONTACTAR CAJERA</span>
+                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <i class="fa-brands fa-whatsapp text-4xl drop-shadow-md text-white"></i>
+                <span class="font-black text-white text-2xl uppercase tracking-wider drop-shadow-lg">CONTACTAR CAJERA</span>
             </button>
 
             <!-- Facebook -->
             <a href="https://www.facebook.com/share/17JEZendtL/" target="_blank"
-                class="w-full py-3 bg-gradient-to-r from-blue-700 to-blue-900 rounded-xl font-bold text-lg text-white shadow-lg flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform active:scale-95 cursor-pointer border border-blue-400/50"
+                class="w-full py-4 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-900 rounded-xl shadow-lg flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform active:scale-95 cursor-pointer border border-blue-400/50 relative overflow-hidden group"
             >
-                <i class="fa-brands fa-facebook text-2xl"></i>
-                <span class="drop-shadow-md">Seguinos en Facebook</span>
+                <div class="absolute inset-0 bg-white opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                <i class="fa-brands fa-facebook text-2xl text-white"></i>
+                <span class="font-black text-white text-lg uppercase tracking-wide drop-shadow-md">Seguinos en Facebook</span>
             </a>
-        </div>
-
-        <!-- FOOTER -->
-        <div class="text-center mt-4 mb-10">
-            <span class="inline-block px-5 py-2 rounded-full border border-red-500/50 text-red-400 font-bold text-[10px] bg-black/80 backdrop-blur-sm uppercase tracking-widest shadow-lg">
-                🔞 Solo mayores de 18 años
-            </span>
         </div>
 
     </main>
